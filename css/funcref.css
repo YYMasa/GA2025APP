@@ -1,0 +1,22 @@
+﻿.param-list {
+    margin-top: 20px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+    .param-list thead {
+        background-color: #FFB6C1;
+    }
+
+    .param-list tbody {
+        background-color:#FFFFFF;
+    }
+
+    .param-list th,
+    .param-list td {
+        border-width: 1px;
+        border-style: solid;
+        padding: 10px;
+        text-align:center;
+        vertical-align:central;
+    }

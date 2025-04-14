@@ -1,0 +1,2565 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DxLibManageWrapper</name>
+    </assembly>
+    <members>
+        <member name="T:DxLibManageWrapper.DLMWResult">
+            <summary>
+            <code>
+            読み: リザルト
+            全てのDXライブラリの関数をラップしたメソッドの戻り値で、
+            DXライブラリの関数の呼び出し・実行が成功したかどうかを判断できる。
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.DLMWResult.Succeeded">
+            <summary>
+            DXライブラリの関数の実行の成功
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.DLMWResult.Failed">
+            <summary>
+            DXライブラリの関数の実行の失敗
+            </summary>
+        </member>
+        <member name="T:DxLibManageWrapper.Draw">
+            <summary>
+            <code>
+            読み: ドロー
+            DXライブラリの描画系関数をまとめたクラス
+            </code>
+            </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.CircleGaugeImage(System.Single,System.Single,System.Int32,System.Single,System.Single,System.Single)">
+            <summary>
+            <code>
+            読み: サークルゲージイメージ
+            画像を使った円形ゲージを描画
+            DXライブラリのDrawCircleGaugeF()
+            
+            // (320f, 240f)の位置に指定したIDの画像を、75%の円形ゲージで描画
+            Draw.CircleGaugeImage(320f, 240f, imageId, 75f);
+            // (posX, posY)の位置に指定したIDの画像を、スタート位置を50%の位置から75%で2倍のサイズで描画
+            Draw.CircleGaugeImage(posX, posY, imageId, 75f, 50f, 2f);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="centerX">円の中心のX座標</param>
+            <param name="centerY">円の中心のY座標</param>
+            <param name="imageId">描画する画像のID</param>
+            <param name="percent">ゲージの割合(float型で0f～100f)</param>
+            <param name="startPercent">(省略可能。省略した場合、デフォルトの0f)ゲージのスタート位置(float型で0f～100f)。0fで0時から始まり、50fで6時から始まる</param>
+            <param name="scale">(省略可能。省略した場合、デフォルトの1f)拡大率(float型で1fで画像の等倍描画)</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.ModifiedImage(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Boolean)">
+            <summary>
+            <code>
+            読み: モディファイドイメージ
+            画像を4頂点で定義される矩形に変形して描画
+            軸に平行な矩形以外でもOK
+            DXライブラリのDrawModiGraphF()
+            
+            // 指定した平行四辺形に変形して画像を描画
+            Draw.ModifiedImage(100f, 100f, 200f, 150f, 200f, 250f, 100f, 200f, imageId);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x1">第1頂点のX座標</param>
+            <param name="y1">第1頂点のY座標</param>
+            <param name="x2">第2頂点のX座標</param>
+            <param name="y2">第2頂点のY座標</param>
+            <param name="x3">第3頂点のX座標</param>
+            <param name="y3">第3頂点のY座標</param>
+            <param name="x4">第4頂点のX座標</param>
+            <param name="y4">第4頂点のY座標</param>
+            <param name="imageId">描画する画像のID</param>
+            <param name="isTransparent">(省略可能。省略した場合、デフォルトのtrue)透明部分を含んだ画像の透明部分を透明にするかどうか。trueで透明にする、falseで透明にしない</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.ExtendImage(System.Single,System.Single,System.Single,System.Single,System.Int32,System.Boolean)">
+            <summary>
+            <code>
+            読み: エクステンドイメージ
+            画像を2頂点で定義される矩形に変形して描画する
+            軸に平行な矩形のみに変形可能
+            DXライブラリのDrawExtendGraphF()
+            
+            // (100f, 100f)と(300f, 150f)で定義される長方形に変形して画像を描画
+            Draw.ExtendImage(100f, 100f, 300f, 150f, imageId);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x1">第1頂点のX座標</param>
+            <param name="y1">第1頂点のY座標</param>
+            <param name="x2">第2頂点のX座標</param>
+            <param name="y2">第2頂点のY座標</param>
+            <param name="imageId">描画する画像のID</param>
+            <param name="isTransparent">(省略可能。省略した場合、デフォルトのtrue)透明部分を含んだ画像の透明部分を透明にするかどうか。trueで透明にする、falseで透明にしない</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.RotatedImage(System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Single,System.Single,System.Boolean)">
+            <summary>
+            <code>
+            読み: ローテードイメージ
+            回転軸を指定して画像を回転させて描画する
+            縦横のスケールをそれぞれ指定するバージョン
+            DXライブラリのDrawRotaGraphFast3F()
+            
+            // 描画領域の中心が(320f, 240f)で、画像の右上の頂点を回転軸として45°回転させて、横に0.5倍、縦に2倍で画像を描画
+            Draw.RotatedImage(320f, 240f, rightCornerX, rightCornerY, 45f, imageId, 0.5f, 2f);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x">自動的に計算される描画領域の中心となる画面上のX座標</param>
+            <param name="y">自動的に計算される描画領域の中心となる画面上のY座標</param>
+            <param name="axisX">回転軸となる画像上のX座標 (画面上の座標とは違うことに注意!)</param>
+            <param name="axisY">回転軸となる画像上のY座標 (画面上の座標とは違うことに注意!)</param>
+            <param name="angleDegree">回転角度(基本的に0f～360f。負数や360以上もOK)</param>
+            <param name="imageId">描画する画像のID</param>
+            <param name="scaleX">(省略可能。省略した場合、デフォルトの1f)横方向の拡大率(1fで等倍描画)</param>
+            <param name="scaleY">(省略可能。省略した場合、デフォルトの1f)縦方向の拡大率(1fで等倍描画)</param>
+            <param name="isTransparent">(省略可能。省略した場合、デフォルトのtrue)透明部分を含んだ画像の透明部分を透明にするかどうか。trueで透明にする、falseで透明にしない</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.RotatedImage(System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Single,System.Boolean)">
+            <summary>
+            <code>
+            読み: ローテードイメージ
+            回転軸を指定して画像を回転させて描画する
+            縦横のスケールを同じ値で指定するバージョン
+            DXライブラリのDrawRotaGraphFast2F()
+            
+            // 描画領域の中心が(320f, 240f)で、画像の中央を回転軸として180°回転させて、3倍で画像を描画
+            Draw.RotateImage(320f, 240f, imageCenterX, imageCenterY, 180f, imageId, 3f);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x">自動的に計算される描画領域の中心となる画面上のX座標</param>
+            <param name="y">自動的に計算される描画領域の中心となる画面上のY座標</param>
+            <param name="axisX">回転軸となる画像上のX座標 (画面上の座標とは違うことに注意!)</param>
+            <param name="axisY">回転軸となる画像上のY座標 (画面上の座標とは違うことに注意!)</param>
+            <param name="angleDegree">回転角度(基本的に0f～360f、負数や360以上もOK)</param>
+            <param name="imageId">描画する画像のID</param>
+            <param name="scale">(省略可能。省略した場合、デフォルトの1f)拡大率(1fで等倍描画)</param>
+            <param name="isTransparent">(省略可能。省略した場合、デフォルトのtrue)透明部分を含んだ画像の透明部分を透明にするかどうか。trueで透明にする、falseで透明にしない</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.RotatedImage(System.Single,System.Single,System.Single,System.Int32,System.Single,System.Boolean)">
+            <summary>
+            <code>
+            読み: ローテードイメージ
+            画像の中心を回転軸として画像を回転させて描画する
+            縦横のスケールを同じ値で指定できる
+            DXライブラリのDrawRotaGraphFastF()
+            
+            // 描画領域の中心が(320f, 240f)で、90°回転させて、0.5倍で画像を描画
+            Draw.RotateImage(320f, 240f, 90f, imageId, 0.5f);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x">自動的に計算される描画領域の中心となる画面上のX座標</param>
+            <param name="y">自動的に計算される描画領域の中心となる画面上のY座標</param>
+            <param name="angleDegree">回転角度(基本的に0f～360f、負数や360以上もOK)</param>
+            <param name="imageId">描画する画像のID</param>
+            <param name="scale">(省略可能。省略した場合、デフォルトの1f)拡大率(1fで等倍描画)</param>
+            <param name="isTransparent">(省略可能。省略した場合、デフォルトのtrue)透明部分を含んだ画像の透明部分を透明にするかどうか。trueで透明にする、falseで透明にしない</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.HorizontallyFlippedImage(System.Single,System.Single,System.Int32,System.Boolean)">
+            <summary>
+            <code>
+            読み: ホライゾンタリーフリップドイメージ
+            画像を左右反転させて描画する
+            DXライブラリのDrawTurnGraphF()
+            
+            // (320f, 240f)の位置に画像を描画
+            Draw.HorizontallyFlippedImage(320f, 240f, imageId);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x">画像の左上頂点の位置となる画面上でのX座標</param>
+            <param name="y">画像の左上頂点の位置となる画面上でのY座標</param>
+            <param name="imageId">描画する画像のID</param>
+            <param name="isTransparent">(省略可能。省略した場合、デフォルトのtrue)透明部分を含んだ画像の透明部分を透明にするかどうか。trueで透明にする、falseで透明にしない</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.Image(System.Single,System.Single,System.Int32,System.Boolean)">
+            <summary>
+            <code>
+            読み: イメージ
+            指定した画像を描画する
+            指定する座標は画像の中心となる画面上の座標ではなく、画像の左上の頂点の位置となる
+            なので、指定した座標のX位置に画像を幅を加えた位置が右端、Y位置に画像の高さを加えた位置が下端となる
+            XからX+画像の幅、YからY+画像の高さで決定される四角形(矩形)の中に画像が描画される
+            DXライブラリのDrawGraphF()
+            
+            // (320f, 240f)の位置に画像を描画する
+            Draw.Image(320f, 240f, imageId);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x">画像の左上頂点の位置となる画面上でのX座標</param>
+            <param name="y">画像の左上頂点の位置となる画面上でのY座標</param>
+            <param name="imageId">描画する画像のID</param>
+            <param name="isTransparent">(省略可能。省略した場合、デフォルトのtrue)透明部分を含んだ画像の透明部分を透明にするかどうか。trueで透明にする、falseで透明にしない</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.Text(System.Single,System.Single,DxLibManageWrapper.DLMWColor,System.Object,System.Nullable{System.Int32},System.Nullable{DxLibManageWrapper.DLMWColor})">
+            <summary>
+            <code>
+            読み: テキスト
+            指定した文字列を描画する
+            フォントIDを指定した場合は、そのフォントで描画し
+            指定しなかった場合は、デフォルトのフォントで描画する
+            また、指定したフォントIDのフォントがアウトラインを含んでいる場合は、アウトラインを指定の色で描画することができる
+            DXライブラリのDrawStringF()およびDrawStringFToHandle()
+            
+            // デフォルトフォントで(20, 20)の位置に"Hello, World!"を描画
+            Draw.Text(20f, 20f, <see cref="P:DxLibManageWrapper.DLMWColor.Red"/>, "Hello, World!");
+            // フォントIDを指定して(20, 40)の位置に"Hello, World!"を描画
+            Draw.Text(20f, 40f, <see cref="P:DxLibManageWrapper.DLMWColor.Green"/>, "Hello, World!", fontId);
+            // アウトラインを持つフォントIDを指定して(20, 60)の位置に"Hello, World!"を描画
+            Draw.Text(20f, 60f, <see cref="P:DxLibManageWrapper.DLMWColor.Blue"/>, "Hello, World!", fontId, <see cref="P:DxLibManageWrapper.DLMWColor.White"/>);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x">X座標</param>
+            <param name="y">Y座標</param>
+            <param name="foreColor">文字色</param>
+            <param name="value">描画する文字列</param>
+            <param name="fontId">(省略可能。省略した場合、デフォルトのフォント)フォントID</param>
+            <param name="outlineColor">(省略可能。省略した場合、デフォルトの黒)アウトラインの色</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.TriangleOutline(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,DxLibManageWrapper.DLMWColor,System.Single)">
+            <summary>
+            <code>
+            読み: トライアングルアウトライン
+            3つの頂点で定義される三角形のアウトラインを描画する
+            アウトラインは辺を芯として外側と内側に均等に幅が割り振られる
+            DXライブラリのDrawTriangleAA()
+            
+            // (320f, 190f)、(370f, 290f)、(270f, 290f)で定義される三角形のアウトラインを幅5pxで描画
+            Draw.TriangleOutline(320f, 190f, 370f, 290f, 270f, 290f, <see cref="P:DxLibManageWrapper.DLMWColor.Blue"/>, 5f);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x1">第1頂点のX座標</param>
+            <param name="y1">第1頂点のY座標</param>
+            <param name="x2">第2頂点のX座標</param>
+            <param name="y2">第2頂点のY座標</param>
+            <param name="x3">第3頂点のX座標</param>
+            <param name="y3">第3頂点のY座標</param>
+            <param name="color">線の色</param>
+            <param name="lineWidth">線の幅</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.Triangle(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,DxLibManageWrapper.DLMWColor)">
+            <summary>
+            <code>
+            読み: トライアングル
+            3つの頂点で定義される三角形を指定した色で塗りつぶして描画する
+            DXライブラリのDrawTriangleAA()
+            
+            // (320f, 190f)、(370f, 290f)、(270f, 290f)で定義される三角形を描画
+            Draw.Triangle(320f, 190f, 370f, 290f, 270f, 290f, <see cref="P:DxLibManageWrapper.DLMWColor.Blue"/>);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x1">第1頂点のX座標</param>
+            <param name="y1">第1頂点のY座標</param>
+            <param name="x2">第2頂点のX座標</param>
+            <param name="y2">第2頂点のY座標</param>
+            <param name="x3">第3頂点のX座標</param>
+            <param name="y3">第3頂点のY座標</param>
+            <param name="color">色</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.RoundRectOutline(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,DxLibManageWrapper.DLMWColor,System.Single)">
+            <summary>
+            <code>
+            読み: ラウンドレクトアウトライン
+            2つの頂点で定義される角丸の矩形のアウトラインを描画する
+            角丸の半径は縦横でそれぞれ指定できる
+            アウトラインは辺を芯として外側と内側に均等に幅が割り振られる
+            DXライブラリのDrawRoundRectAA()
+            
+            // (50f, 50f)、(100f, 100f)で定義される矩形のアウトラインを縦横5pxの半径の角丸で幅5pxで描画
+            Draw.RoundRectOutline(50f, 50f, 100f, 100, 5f, 5f, 32, <see cref="P:DxLibManageWrapper.DLMWColor.Blue"/>, 5f);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x1">第1頂点のX座標</param>
+            <param name="y1">第1頂点のY座標</param>
+            <param name="x2">第2頂点のX座標</param>
+            <param name="y2">第2頂点のY座標</param>
+            <param name="radiusHorizontal">角丸の横方向の半径</param>
+            <param name="radiusVertical">角丸の縦方向の半径</param>
+            <param name="numVertices">角丸の頂点数</param>
+            <param name="color">線の色</param>
+            <param name="lineWidth">線の幅</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.RoundRect(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Int32,DxLibManageWrapper.DLMWColor)">
+            <summary>
+            <code>
+            読み: ラウンドレクト
+            2つの頂点で定義される角丸の矩形を指定した色で塗りつぶして描画する
+            角丸の半径は縦横でそれぞれ指定できる
+            DXライブラリのDrawRoundRectAA()
+            
+            // (50f, 50f)、(100f, 100f)で定義される矩形を縦横5pxの半径の角丸で描画
+            Draw.RoundRectOutline(50f, 50f, 100f, 100, 5f, 5f, 32, <see cref="P:DxLibManageWrapper.DLMWColor.Blue"/>);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x1">第1頂点のX座標</param>
+            <param name="y1">第1頂点のY座標</param>
+            <param name="x2">第2頂点のX座標</param>
+            <param name="y2">第2頂点のY座標</param>
+            <param name="radiusHorizontal">角丸の横方向の半径</param>
+            <param name="radiusVertical">角丸の縦方向の半径</param>
+            <param name="numVertices">角丸の頂点数</param>
+            <param name="color">色</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.QuadrangleOutline(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,DxLibManageWrapper.DLMWColor,System.Single)">
+            <summary>
+            <code>
+            読み: クワドラングルアウトライン
+            4つの頂点で定義される矩形のアウトラインを描画する
+            軸に平行な矩形以外の矩形も描画可能
+            アウトラインは辺を芯として外側と内側に均等に幅が割り振られる
+            DXライブラリのDrawQuadrangleAA()
+            
+            // (320f, 240f)を中心とするひし形のアウトラインを幅5pxの線で描画
+            Draw.QuadrangleOutline(270f, 240f, 320f, 190f, 370f, 240f, 320f, 290f, <see cref="P:DxLibManageWrapper.DLMWColor.Green"/>, 5f);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x1">第1頂点のX座標</param>
+            <param name="y1">第1頂点のY座標</param>
+            <param name="x2">第2頂点のX座標</param>
+            <param name="y2">第2頂点のY座標</param>
+            <param name="x3">第3頂点のX座標</param>
+            <param name="y3">第3頂点のY座標</param>
+            <param name="x4">第4頂点のX座標</param>
+            <param name="y4">第4頂点のY座標</param>
+            <param name="color">線の色</param>
+            <param name="lineWidth">線の幅</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.Quadrangle(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,DxLibManageWrapper.DLMWColor)">
+            <summary>
+            <code>
+            読み: クワドラングル
+            4つの頂点で定義される矩形を指定した色で塗りつぶして描画する
+            軸に平行な矩形以外の矩形も描画可能
+            DXライブラリのDrawQuadrangleAA()
+            
+            // (320f, 240f)を中心とするひし形を描画
+            Draw.Quadrangle(270f, 240f, 320f, 190f, 370f, 240f, 320f, 290f, <see cref="P:DxLibManageWrapper.DLMWColor.Green"/>);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x1">第1頂点のX座標</param>
+            <param name="y1">第1頂点のY座標</param>
+            <param name="x2">第2頂点のX座標</param>
+            <param name="y2">第2頂点のY座標</param>
+            <param name="x3">第3頂点のX座標</param>
+            <param name="y3">第3頂点のY座標</param>
+            <param name="x4">第4頂点のX座標</param>
+            <param name="y4">第4頂点のY座標</param>
+            <param name="color">線の色</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.Pixel(System.Int32,System.Int32,DxLibManageWrapper.DLMWColor)">
+            <summary>
+            <code>
+            読み: ピクセル
+            指定した位置のピクセルに指定した色を配置する
+            1pxだけ描画なので、座標はfloatではなくint(整数値)で指定する
+            DxライブラリのDrawPixel()
+            
+            // (320, 240)のピクセルに青を置く
+            Draw.Pixel(320, 240, <see cref="P:DxLibManageWrapper.DLMWColor.Green"/>);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x">X座標(int型)</param>
+            <param name="y">Y座標(int型)</param>
+            <param name="color">色</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.OvalOutline(System.Single,System.Single,System.Single,System.Single,System.Int32,DxLibManageWrapper.DLMWColor,System.Single)">
+            <summary>
+            <code>
+            読み: オーバルアウトライン
+            楕円のアウトラインを描画する
+            アウトラインは円周を芯として楕円の外側と内側に均等に幅が割り振られる
+            DXライブラリのDrawOvalAA()
+            
+            // (320f, 240f)を中心として、横方向の半径が50f、縦方向の半径が25fで定義される楕円のアウトラインを幅5pxで描画
+            Draw.OvalOutline(320f, 240f, 50f, 25f, 32, <see cref="P:DxLibManageWrapper.DLMWColor.Green"/>, 5f);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="centerX">楕円の中心のX座標</param>
+            <param name="centerY">楕円の中心のY座標</param>
+            <param name="radiusHorizontal">横方向の半径</param>
+            <param name="radiusVertical">縦方向の半径</param>
+            <param name="numVertices">楕円の頂点数</param>
+            <param name="color">線の色</param>
+            <param name="lineWidth">線の幅</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.Oval(System.Single,System.Single,System.Single,System.Single,System.Int32,DxLibManageWrapper.DLMWColor)">
+            <summary>
+            <code>
+            読み: オーバル
+            楕円を指定した色で塗りつぶして描画する
+            DXライブラリのDrawOvalAA()
+            
+            // (320f, 240f)を中心として、横方向の半径が50f、縦方向の半径が25fで定義される楕円を描画
+            Draw.OvalOutline(320f, 240f, 50f, 25f, 32, <see cref="P:DxLibManageWrapper.DLMWColor.Green"/>, 5f);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="centerX">楕円の中心のX座標</param>
+            <param name="centerY">楕円の中心のY座標</param>
+            <param name="radiusHorizontal">横方向の半径</param>
+            <param name="radiusVertical">縦方向の半径</param>
+            <param name="numVertices">楕円の頂点数</param>
+            <param name="color">色</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.Line(System.Single,System.Single,System.Single,System.Single,DxLibManageWrapper.DLMWColor,System.Single)">
+            <summary>
+            <code>
+            読み: ライン
+            始点と終点を結ぶ直線を指定した幅で描画する
+            DXライブラリのDrawLineAA()
+            
+            // (100f, 100f)と(300f, 250f)を結ぶ直線を幅5pxで描画
+            Draw.Line(100f, 100f, 300f, 250f, <see cref="P:DxLibManageWrapper.DLMWColor.Green"/>, 5f);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="startX">始点のX座標</param>
+            <param name="startY">始点のY座標</param>
+            <param name="endX">終点のX座標</param>
+            <param name="endY">終点のY座標</param>
+            <param name="color">線の色</param>
+            <param name="width">線の幅</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.PolygonOutline(System.Single,System.Single,System.Single,System.UInt32,DxLibManageWrapper.DLMWColor,System.Single)">
+            <summary>
+            <code>
+            読み: ポリゴンアウトライン
+            指定した半径の円に内接する多角形のアウトラインを描画する
+            頂点数は3から任意の数値まで
+            多角形の傾きは調整できない
+            現代のコンピュータ・モニターでは真円を描画することはできないので、
+            円を描画するときはこの関数を使って、頂点数を多くして円に近似する多角形を描画する
+            アウトラインは辺を芯として外側と内側に均等に幅が割り振られる
+            DXライブラリのDrawCircleAA()
+            
+            // (320f, 240f)を中心とする半径20pxの(近似)円のアウトラインを幅5pxで描画
+            Draw.PolygonOutline(320f, 240f, 20f, 32, <see cref="P:DxLibManageWrapper.DLMWColor.Green"/>, 5f);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="centerX">多角形が内接する円の中心のX座標</param>
+            <param name="centerY">多角形が内接する円の中心のY座標</param>
+            <param name="radius">多角形が内接する円の半径</param>
+            <param name="numVertices">多角形の頂点数</param>
+            <param name="color">線の色</param>
+            <param name="lineWidth">線の幅</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.Polygon(System.Single,System.Single,System.Single,System.UInt32,DxLibManageWrapper.DLMWColor)">
+            <summary>
+            <code>
+            読み: ポリゴン
+            指定した半径の円に内接する多角形を指定した色で塗りつぶして描画する
+            頂点数は3から任意の数値まで
+            多角形の傾きは調整できない
+            現代のコンピュータ・モニターでは真円を描画することはできないので、
+            円を描画するときはこの関数を使って、頂点数を多くして円に近似する多角形を描画する
+            DXライブラリのDrawCircleAA()
+            
+            // (320f, 240f)を中心とする半径20pxの(近似)円を描画
+            Draw.Polygon(320f, 240f, 20f, 32, <see cref="P:DxLibManageWrapper.DLMWColor.Red"/>);
+            </code>
+            </summary>
+            <param name="centerX">多角形が内接する円の中心のX座標</param>
+            <param name="centerY">多角形が内接する円の中心のY座標</param>
+            <param name="radius">多角形が内接する円の半径</param>
+            <param name="numVertices">多角形の頂点数</param>
+            <param name="color">色</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.Box(System.Single,System.Single,System.Single,System.Single,DxLibManageWrapper.DLMWColor)">
+            <summary>
+            <code>
+            読み: ボックス
+            2つの頂点で定義される矩形を指定した色で塗りつぶして描画する
+            軸に平行な矩形のみ描画できる
+            DXライブラリのDrawBoxAA()
+            
+            // (150f, 150f)、(250f, 250f)で定義される正方形を描画
+            Draw.Box(150f, 150f, 250f, 250f, <see cref="P:DxLibManageWrapper.DLMWColor.Red"/>);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x1">第1頂点のX座標</param>
+            <param name="y1">第1頂点のY座標</param>
+            <param name="x2">第2頂点のX座標</param>
+            <param name="y2">第2頂点のY座標</param>
+            <param name="color">色</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.BoxOutline(System.Single,System.Single,System.Single,System.Single,DxLibManageWrapper.DLMWColor,System.Single)">
+            <summary>
+            <code>
+            読み: ボックスアウトライン
+            2つの頂点で定義される矩形のアウトラインを描画する
+            軸に平行な矩形のみ描画できる
+            アウトラインの幅は辺を芯として外側と内側に均等に割り振られる
+            DXライブラリのDrawBoxAA()
+            
+            // (150f, 150f)、(250f, 250f)で定義される正方形のアウトラインを幅5pxで描画
+            Draw.Box(150f, 150f, 250f, 250f, <see cref="P:DxLibManageWrapper.DLMWColor.Red"/>, 5f);
+            </code>
+            </summary>
+            <param name="x1">第1頂点のX座標</param>
+            <param name="y1">第1頂点のY座標</param>
+            <param name="x2">第2頂点のX座標</param>
+            <param name="y2">第2頂点のY座標</param>
+            <param name="color">線の色</param>
+            <param name="lineWidth">線の色</param>
+            <returns></returns>
+        </member>
+        <member name="T:DxLibManageWrapper.FontWeight">
+            <summary>
+            <code>
+            読み: フォントウェイト
+            描画時のフォントデータにおけるフォントウェイト(文字の線の太さ)
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FontWeight.Default">
+            <summary>
+            デフォルト(<see cref="F:DxLibManageWrapper.FontWeight.Maximum"/>と同じ)
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FontWeight.Minimum">
+            <summary>
+            もっとも細い
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FontWeight.Lightest">
+            <summary>
+            <see cref="F:DxLibManageWrapper.FontWeight.Minimum"/>より太く<see cref="F:DxLibManageWrapper.FontWeight.Lighter"/>より細い
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FontWeight.Lighter">
+            <summary>
+            <see cref="F:DxLibManageWrapper.FontWeight.Lightest"/>より太く<see cref="F:DxLibManageWrapper.FontWeight.Light"/>より細い
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FontWeight.Light">
+            <summary>
+            <see cref="F:DxLibManageWrapper.FontWeight.Lighter"/>より太く<see cref="F:DxLibManageWrapper.FontWeight.LowerMedium"/>より細い
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FontWeight.LowerMedium">
+            <summary>
+            <see cref="F:DxLibManageWrapper.FontWeight.Light"/>より太く<see cref="F:DxLibManageWrapper.FontWeight.UpperMedium"/>より細い
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FontWeight.UpperMedium">
+            <summary>
+            <see cref="F:DxLibManageWrapper.FontWeight.LowerMedium"/>より太く<see cref="F:DxLibManageWrapper.FontWeight.Heavy"/>より細い
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FontWeight.Heavy">
+            <summary>
+            <see cref="F:DxLibManageWrapper.FontWeight.UpperMedium"/>より太く<see cref="F:DxLibManageWrapper.FontWeight.Heavier"/>より細い
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FontWeight.Heavier">
+            <summary>
+            <see cref="F:DxLibManageWrapper.FontWeight.Heavy"/>より太く<see cref="F:DxLibManageWrapper.FontWeight.Heaviest"/>より細い
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FontWeight.Heaviest">
+            <summary>
+            <see cref="F:DxLibManageWrapper.FontWeight.Heavier"/>より太く<see cref="F:DxLibManageWrapper.FontWeight.Maximum"/>より細い
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FontWeight.Maximum">
+            <summary>
+            もっとも太い
+            </summary>
+        </member>
+        <member name="T:DxLibManageWrapper.FullScreenResolutionMode">
+            <summary>
+            <code>
+            読み: フルスクリーンレゾリューションモード
+            フルスクリーン時の解像度モード
+            <see cref="M:DxLibManageWrapper.Window.SetFullScreenResolutionMode(DxLibManageWrapper.FullScreenResolutionMode)"/>に引数として与えるもの
+            ウィンドウモードのときは無視される
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FullScreenResolutionMode.Desktop">
+            <summary>
+            現在のプライマリモニタの解像度に合わせる
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FullScreenResolutionMode.Native">
+            <summary>
+            現在のスクリーンサイズに合わせる
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FullScreenResolutionMode.Maximum">
+            <summary>
+            利用できる最大サイズの解像度に合わせる
+            </summary>
+        </member>
+        <member name="T:DxLibManageWrapper.FullScreenScalingMode">
+            <summary>
+            <code>
+            読み: フルスクリーンスケーリングモード
+            フルスクリーン時のスクリーンの拡大方法
+            <see cref="M:DxLibManageWrapper.Window.SetFullScreenScalingMode(DxLibManageWrapper.FullScreenScalingMode)"/>に引数として与えるもの
+            ウィンドウモード時は無視される
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FullScreenScalingMode.Bilinear">
+            <summary>
+            ピクセルが滲む
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.FullScreenScalingMode.Nearest">
+            <summary>
+            ピクセルがくっきりする
+            </summary>
+        </member>
+        <member name="T:DxLibManageWrapper.Game">
+            <summary>
+            <code>
+            読み: ゲーム
+            描画や入力以外のゲームの基盤となるような様々なDXライブラリのユーティリティ関数をまとめたクラス
+            </code>
+            </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.Game.ShowCursor">
+            <summary>
+            <code>
+            読み: ショーカーソル
+            カーソルを表示する
+            DXライブラリのSetMouseDispFlag()
+            
+            // カーソルを表示する
+            Game.ShowCursor();
+            </code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Game.HideCursor">
+            <summary>
+            <code>
+            読み: ハイドカーソル
+            カーソルを非表示にする
+            DXライブラリのSetMouseDispFlag()
+            
+            // カーソルを非表示にする
+            Game.HideCursor();
+            </code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Game.ProcessMessage">
+            <summary>
+            <code>
+            読み: プロセスメッセージ
+            Windowsのメッセージを適切に処理するための関数
+            ゲームループの継続条件式として必ず利用する
+            DXライブラリのProcessMessage()
+            
+            // ゲームループの実装
+            while(Game.ProcessMessage() == <see cref="F:DxLibManageWrapper.DLMWResult.Succeeded"/>)
+            {
+            	// 入力や描画などのゲームロジック
+            }
+            </code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Game.PrintDebugLog(System.Object)">
+            <summary>
+            <code>
+            読み: プリントデバッグログ
+            デバッグ用の出力をウィンドウ上に行なう
+            DXライブラリのprintfDx()
+            
+            // デバッグ出力として"DEBUG"を表示する
+            Game.PrintDebugLog("DEBUG");
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="value">出力する内容(string型の値でも、それ以外の型の値でもOK)</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Game.ClearDebugLog">
+            <summary>
+            <code>
+            読み: クリア－デバッグログ
+            それまでに出力した全てのデバッグログを削除する
+            DXライブラリのclsDx()
+            
+            // デバッグログを削除する
+            Game.ClearDebugLog();
+            </code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Game.GetNowCount">
+            <summary>
+            <code>
+            読み: ゲットナウカウント
+            Windowsが起動してからの経過時間をマイクロ秒で取得する
+            デルタタイム(フレーム間時間)など時間の計測などは必ずこの関数を利用する
+            マイクロ秒だと利用しずらいので実際には秒に直して利用することが多い
+            DXライブラリのGetNowHiPerformanceCount()
+            
+            // デルタタイムの計測と5秒からカウントダウンの実装
+            float prevFrameTime = Game.GetNowCount(); // 前回デルタタイムを計測したときの時間
+            float timeForCountDown = 5f; カウントダウン用の現在の時間が格納される変数
+            float deltaTime; // デルタタイムを格納する変数
+            while(<see cref="M:DxLibManageWrapper.Game.ProcessMessage"/> == <see cref="F:DxLibManageWrapper.DLMWResult.Succeeded"/>)
+            {
+            	// デルタタイムは今のフレームでの時間から1つ前のフレームの時間を引いた数値
+            	// 100万で割っているのはマイクロ秒が1/100万秒なので秒に直すため
+            	deltaTime = (Game.GetNowCount() - prevFrameTime) / 1000000f;
+            	
+            	// 次のフレームでのデルタタイムの計測のために今のフレームの時間を保存する
+            	prevFrameTime = Game.GetNowCount();
+            
+            	// カウントダウンの時間が格納された変数からデルタタイムを引く
+            	// 時間の計測はdeltaTimeを積算することで実現する
+            	timeForCountDown -= deltaTime;
+            	
+            	// 5秒経過したらゲームループを抜ける
+            	if(timeForCoundDown &lt;= 0f)
+            	{
+            		break;
+            	}
+            }
+            
+            </code>
+            </summary>
+            <returns>Windowsが起動してからの経過時間(<see cref="T:System.Int64"/>型、単位: マイクロ秒)</returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Game.GetRandom(System.Int32)">
+            <summary>
+            <code>
+            0から指定した値を含む範囲の中からランダムに1つの値を返す
+            乱数の最大値を指定する引数はint型なので負数も与えられるが、
+            負数を与えた場合は常に1が乱数の最大値となる
+            DXライブラリのGetRand()
+            
+            // 0から512の中からランダムに値を取得する
+            int value = Game.GetRandom(512);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="max">乱数の最大値</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Game.SetRandomSeed(System.Int32)">
+            <summary>
+            <code>
+            乱数のシードを設定する
+            同じシードを与えた場合、プログラムの実行タイミングが違っていても、
+            常に同じ順番で乱数が取得されるようになる
+            この関数を使って任意のシードを与えなかった場合、
+            DXライブラリはその時点の時刻をシードとして利用する
+            DXライブラリのSRand()
+            
+            // 乱数のシードとして100を渡す
+            Game.SetRandomSeed(100);
+            </code>
+            </summary>
+            <param name="seed">シード値</param>
+            <returns></returns>
+        </member>
+        <member name="T:DxLibManageWrapper.IDLMWFont">
+            <summary>
+            <code>
+            読み: フォント
+            読み込んだフォントを保持するインターフェース
+            ここから実際の描画に利用するフォントデータを作成する
+            <see cref="M:DxLibManageWrapper.Load.Font(System.String,DxLibManageWrapper.IDLMWFont@)"/>と<see cref="M:DxLibManageWrapper.Load.FontFile(System.String,DxLibManageWrapper.IDLMWFont@)"/>の戻り値
+            </code>
+            </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.IDLMWFont.CreateFontData(System.Int32@,System.Int32,DxLibManageWrapper.FontWeight,System.Boolean)">
+            <summary>
+            <code>
+            読み: クリエイトフォントデータ
+            縁取りの無いフォントデータを作成する
+            フォントデータを利用して文字列を描画する<see cref="M:DxLibManageWrapper.Draw.Text(System.Single,System.Single,DxLibManageWrapper.DLMWColor,System.Object,System.Nullable{System.Int32},System.Nullable{DxLibManageWrapper.DLMWColor})"/>の第4引数に与える値を得られる。
+            DXライブラリのCreateFontToHandle()
+            
+            // 読み込んだフォントファイルからフォントデータを作成し、文字列を描画する
+            IDLMWFont font = <see cref="M:DxLibManageWrapper.Load.FontFile(System.String,DxLibManageWrapper.IDLMWFont@)"/>("font.ttf");
+            int fontId;
+            font.CreateFontData(out fontId);
+            <see cref="M:DxLibManageWrapper.Draw.Text(System.Single,System.Single,DxLibManageWrapper.DLMWColor,System.Object,System.Nullable{System.Int32},System.Nullable{DxLibManageWrapper.DLMWColor})"/>(20f, 20f, <see cref="P:DxLibManageWrapper.DLMWColor.White"/>, fontId, "Hello, World!");
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="fontId">作成したフォントデータのIDが格納される</param>
+            <param name="size">(省略可能。省略した場合は-1)フォントサイズ</param>
+            <param name="weight">(省略可能。省略した場合は<see cref="F:DxLibManageWrapper.FontWeight.Default"/>)フォントウェイト</param>
+            <param name="isItalic">(省略可能。省略した場合はfalse)斜体にするかどうか(trueで斜体にする)</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.IDLMWFont.CreateOutlineFontData(System.Int32@,System.Int32,DxLibManageWrapper.FontWeight,System.Int32,System.Boolean)">
+            <summary>
+            
+            <code>
+            読み: クリエイトエッジドフォントデータ
+            縁取りの有るフォントデータを作成する
+            フォントデータを利用して文字列を描画する<see cref="M:DxLibManageWrapper.Draw.Text(System.Single,System.Single,DxLibManageWrapper.DLMWColor,System.Object,System.Nullable{System.Int32},System.Nullable{DxLibManageWrapper.DLMWColor})"/>の第4引数に与える値を得られる。
+            DXライブラリのCreateFontToHandle()
+            
+            // 読み込んだフォントファイルからフォントデータを作成し、文字列を描画する
+            IDLMWFont font = <see cref="M:DxLibManageWrapper.Load.FontFile(System.String,DxLibManageWrapper.IDLMWFont@)"/>("font.ttf");
+            int fontId;
+            font.CreateOutlineFontData(out fontId);
+            <see cref="M:DxLibManageWrapper.Draw.Text(System.Single,System.Single,DxLibManageWrapper.DLMWColor,System.Object,System.Nullable{System.Int32},System.Nullable{DxLibManageWrapper.DLMWColor})"/>(20f, 20f, <see cref="P:DxLibManageWrapper.DLMWColor.White"/>, fontId, "Hello, World!", <see cref="P:DxLibManageWrapper.DLMWColor.Red"/>);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="fontId">作成したフォントデータのIDが格納される</param>
+            <param name="size">(省略可能。省略した場合は-1)フォントサイズ</param>
+            <param name="weight">(省略可能。省略した場合は<see cref="F:DxLibManageWrapper.FontWeight.Default"/>)フォントウェイト</param>
+            <param name="edgeSize">(省略可能。省略した場合は-1)縁取りのサイズ</param>
+            <param name="isItalic">(省略可能。省略した場合はfalse)斜体にするかどうか(trueで斜体にする)</param>
+            <returns></returns>
+        </member>
+        <member name="T:DxLibManageWrapper.Input">
+            <summary>
+            <code>
+            読み: インプット
+            DXライブラリのマウスとキーボードの入力を取り扱う関数をまとめたクラス
+            </code>
+            </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.Input.UpdateAllKeyStates">
+             <summary>
+             <code>
+             読み: アップデートオールキーステーツ
+             現在のキーボードの入力状態を更新する
+             必ず<see cref="M:DxLibManageWrapper.Input.GetKeyState(DxLibManageWrapper.KeyboardKey,System.Boolean@)"/>を呼び出す前に実行すること
+             この関数を呼び出さずに<see cref="M:DxLibManageWrapper.Input.GetKeyState(DxLibManageWrapper.KeyboardKey,System.Boolean@)"/>を呼び出すと、常にどのキーも押されていない状態となる
+             DXライブラリのGetHitKeyStateAll()
+            
+             // キーボードの状態を更新し、スペースキーの入力の有無を確認する
+             Input.UpdateAllKeyStates()
+             bool isPressed;
+             <see cref="M:DxLibManageWrapper.Input.GetKeyState(DxLibManageWrapper.KeyboardKey,System.Boolean@)"/>(<see cref="F:DxLibManageWrapper.KeyboardKey.Space"/>, out isPressed);
+             if(isPressed == true)
+             {
+            		<see cref="M:DxLibManageWrapper.Game.PrintDebugLog(System.Object)"/>("スペースキーが押されています");
+             }
+             else
+             {
+            		<see cref="M:DxLibManageWrapper.Game.PrintDebugLog(System.Object)"/>("スペースキーは押されていません");
+             }
+             </code>
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Input.GetMouseWheelValue(System.Int32@)">
+            <summary>
+            <code>
+            読み: ゲットマウスホイールヴァリュー
+            マウスホイールの回転量を取得する
+            回転がある場合の戻り値は0以外で、負数が手前側、正数が奥側の回転となる。
+            DXライブラリのGetMouseWheelRotVol()
+            
+            // 取得した回転量を表示する
+            int wheelValue;
+            Input.GetMouseWheelValue(out wheelValue);
+            <see cref="M:DxLibManageWrapper.Game.PrintDebugLog(System.Object)"/>("マウスホイールの回転量: " + wheelValue);
+            </code>
+            </summary>
+            <param name="value">マウスホイールの回転量が格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Input.GetMouseButtons(DxLibManageWrapper.MouseButtons@)">
+            <summary>
+            <code>
+            読み: ゲットマウスボタンズ
+            マウスのボタンの押下状態を取得する
+            この関数を呼び出した時点で押されているボタンのフラグが戻り値として返ってくる
+            戻り値の<see cref="T:DxLibManageWrapper.MouseButtons"/>の値の組合せは以下の通り
+             <see cref="F:DxLibManageWrapper.MouseButtons.None"/>: どのキーも押されていない
+             <see cref="F:DxLibManageWrapper.MouseButtons.Left"/>: 左ボタンのみ押されている
+             <see cref="F:DxLibManageWrapper.MouseButtons.Right"/>: 右ボタンのみ押されている
+             <see cref="F:DxLibManageWrapper.MouseButtons.Middle"/>: 中央ボタンのみ押されている
+             <see cref="F:DxLibManageWrapper.MouseButtons.Left"/>, <see cref="F:DxLibManageWrapper.MouseButtons.Right"/>: 左と右のボタンが押されている
+             <see cref="F:DxLibManageWrapper.MouseButtons.Left"/>, <see cref="F:DxLibManageWrapper.MouseButtons.Middle"/>: 左と中央のボタンが押されている
+             <see cref="F:DxLibManageWrapper.MouseButtons.Right"/>, <see cref="F:DxLibManageWrapper.MouseButtons.Middle"/>: 右と中央ボタンが押されている
+             <see cref="F:DxLibManageWrapper.MouseButtons.Left"/>, <see cref="F:DxLibManageWrapper.MouseButtons.Right"/>, <see cref="F:DxLibManageWrapper.MouseButtons.Middle"/>: 全てのボタンが押されている
+            DXライブラリのGetMouseInput()
+            
+            // マウスボタンの押下状態を表示する
+            <see cref="T:DxLibManageWrapper.MouseButtons"/> mouseButtons;
+            Input.GetMouseButtons(out mouseButtons);
+            <see cref="M:DxLibManageWrapper.Game.PrintDebugLog(System.Object)"/>("マウスボタン: " + mouseButtons);
+            </code>
+            </summary>
+            <param name="mouseButtons">現在押されているマウスボタンのフラグが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Input.IsPressed(DxLibManageWrapper.MouseButtons,DxLibManageWrapper.MouseButtons,System.Boolean@)">
+            <summary>
+            <code>
+            読み: イズプレスド
+            <see cref="T:DxLibManageWrapper.MouseButtons"/>の拡張メソッド
+            <see cref="M:DxLibManageWrapper.Input.GetMouseButtons(DxLibManageWrapper.MouseButtons@)"/>から返ってきた値の中から特定のボタンが押されているかどうかを判断できる
+            
+            // マウスの左ボタンが押されているかどうかを判断する
+            <see cref="T:DxLibManageWrapper.MouseButtons"/> mouseButtons;
+            <see cref="M:DxLibManageWrapper.Input.GetMouseButtons(DxLibManageWrapper.MouseButtons@)"/>(out mouseButtons);
+            bool isPressed;
+            mouseButtons.IsPressed(<see cref="F:DxLibManageWrapper.MouseButtons.Left"/>, out isPressed);
+            if(isPressed == true)
+            {
+            	<see cref="M:DxLibManageWrapper.Game.PrintDebugLog(System.Object)"/>("マウスの左ボタンは押されている");
+            }
+            else
+            {
+            	<see cref="M:DxLibManageWrapper.Game.PrintDebugLog(System.Object)"/>("マウスの左ボタンは押されていない");
+            }
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="buttons">IsPressed()を呼び出す<see cref="T:DxLibManageWrapper.MouseButtons"/>型の値。ただし、()の中に記述する必要は無い</param>
+            <param name="button">チェックするボタンの種類</param>
+            <param name="isPressed">指定したボタンが押されていればtrue、押されていなければfalseが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Input.GetCursorPosition(System.Int32@,System.Int32@)">
+            <summary>
+            <code>
+            読み: ゲットカーソルポジション
+            ウィンドウの描画領域の左上角を原点とするカーソルの位置を取得する
+            原点より右側下側に行くほど大きな値となり、原点より左側上側に行くほどより小さい値(負数)となる
+            DXライブラリのGetMousePoint()
+            
+            // カーソルの位置を取得し表示する
+            int cursorX, int cursorY;
+            GetCursorPosition(out cursorX, out cursorY);
+            <see cref="M:DxLibManageWrapper.Game.PrintDebugLog(System.Object)"/>($"カソールの座標: {cursorX}, {cursorY}");
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="x">カーソルのX座標が格納される</param>
+            <param name="y">カーソルのY座標が格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Input.GetKeyState(DxLibManageWrapper.KeyboardKey,System.Boolean@)">
+             <summary>
+             <code>
+             読み: ゲットキーステート
+             特定のキーの押下状態を取得する
+             この関数を実行する前に必ず<see cref="M:DxLibManageWrapper.Input.UpdateAllKeyStates"/>を実行すること
+            
+             // キーボードの状態を更新し、スペースキーの入力の有無を確認する
+             <see cref="M:DxLibManageWrapper.Input.UpdateAllKeyStates"/>;
+             bool isPressed;
+             Input.GetKeyState(<see cref="F:DxLibManageWrapper.KeyboardKey.Space"/>, out isPressed);
+             if(isPressed == true)
+             {
+            		<see cref="M:DxLibManageWrapper.Game.PrintDebugLog(System.Object)"/>("スペースキーが押されています");
+             }
+             else
+             {
+            		<see cref="M:DxLibManageWrapper.Game.PrintDebugLog(System.Object)"/>("スペースキーは押されていません");
+             }
+             
+             引数の説明
+             </code>
+             </summary>
+             <param name="key">押下状態を確認したいキーの種類</param>
+             <param name="isPressed">指定したキーが押されていればtrue、押されていなければfalseが格納される</param>
+             <returns></returns>
+        </member>
+        <member name="T:DxLibManageWrapper.KeyboardKey">
+            <summary>
+            <code>
+            読み: キーボードキー
+            キーボードのキー種別
+            <see cref="!:Input.GetKeyState(KeyboardKey)"/>に渡す値
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Back">
+            <summary>
+            バックスペース
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Tab">
+            <summary>
+            タブ
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Return">
+            <summary>
+            エンター
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Enter">
+            <summary>
+            エンター
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.LeftShift">
+            <summary>
+            左側のシフト
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.RightShift">
+            <summary>
+            右側のシフト
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.LeftControl">
+            <summary>
+            左側のコントロール
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.RightControl">
+            <summary>
+            右側のコントロール
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Escape">
+            <summary>
+            エスケープ
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Space">
+            <summary>
+            スペース
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.PageUp">
+            <summary>
+            ページアップ
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.PageDown">
+            <summary>
+            ページダウン
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.End">
+            <summary>
+            エンド
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Home">
+            <summary>
+            ホーム
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Left">
+            <summary>
+            左矢印
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Up">
+            <summary>
+            上矢印
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Right">
+            <summary>
+            右矢印
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Down">
+            <summary>
+            下矢印
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Insert">
+            <summary>
+            インサート
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Delete">
+            <summary>
+            デリート
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Minus">
+            <summary>
+            マイナス
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Yen">
+            <summary>
+            \ (もしくはバックスラッシュ)
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.PrevTrack">
+            <summary>
+            ^
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Period">
+            <summary>
+            . ピリオド
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Slash">
+            <summary>
+            / スラッシュ
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.LeftAlt">
+            <summary>
+            左側のAlt
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.RightAlt">
+            <summary>
+            右側のAlt
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Scroll">
+            <summary>
+            スクロール
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.SemiColon">
+            <summary>
+            ; セミコロン
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Colon">
+            <summary>
+            : コロン
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.LeftBracket">
+            <summary>
+            [
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.RightBracket">
+            <summary>
+            ]
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.At">
+            <summary>
+            @
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.BackSlash">
+            <summary>
+            \ (もしくはバックスラッシュ)
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Comma">
+            <summary>
+            , コンマ
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Kanij">
+            <summary>
+            漢字(半角/全角切り替え)
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Convert">
+            <summary>
+            変換
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.NoConvert">
+            <summary>
+            無変換
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Kana">
+            <summary>
+            かな
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.CapsLock">
+            <summary>
+            キャプスロック
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.SysRq">
+            <summary>
+            プリントスクリーン
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Pause">
+            <summary>
+            ポーズ
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.LeftWindows">
+            <summary>
+            左側のWindowsキー
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.RightWindows">
+            <summary>
+            右側のWindowsキー
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.NumLock">
+            <summary>
+            NumLock
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Numpad0">
+            <summary>
+            テンキーパッドの0
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Numpad1">
+            <summary>
+            テンキーパッドの1
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Numpad2">
+            <summary>
+            テンキーパッドの2
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Numpad3">
+            <summary>
+            テンキーパッドの3
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Numpad4">
+            <summary>
+            テンキーパッドの4
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Numpad5">
+            <summary>
+            テンキーパッドの5
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Numpad6">
+            <summary>
+            テンキーパッドの6
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Numpad7">
+            <summary>
+            テンキーパッドの7
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Numpad8">
+            <summary>
+            テンキーパッドの8
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Numpad9">
+            <summary>
+            テンキーパッドの9
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.NumpadMultiply">
+            <summary>
+            テンキーパッドの*
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.NumpadAdd">
+            <summary>
+            テンキーパッドの+
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.NumpadSubtract">
+            <summary>
+            テンキーパッドの-
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.NumpadDecimal">
+            <summary>
+            テンキーパッドの. (小数点、ピリオド)
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.NumpadDivide">
+            <summary>
+            テンキーパッドの/
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.NumpadEnter">
+            <summary>
+            テンキーパッドのエンター
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.F1">
+            <summary>
+            F1
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.F2">
+            <summary>
+            F2
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.F3">
+            <summary>
+            F3
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.F4">
+            <summary>
+            F4
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.F5">
+            <summary>
+            F5
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.F6">
+            <summary>
+            F6
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.F7">
+            <summary>
+            F7
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.F8">
+            <summary>
+            F8
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.F9">
+            <summary>
+            F9
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.F10">
+            <summary>
+            F10
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.F11">
+            <summary>
+            F11
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.F12">
+            <summary>
+            F12
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.A">
+            <summary>
+            A
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.B">
+            <summary>
+            B
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.C">
+            <summary>
+            C
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.D">
+            <summary>
+            D
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.E">
+            <summary>
+            E
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.F">
+            <summary>
+            F
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.G">
+            <summary>
+            G
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.H">
+            <summary>
+            H
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.I">
+            <summary>
+            I
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.J">
+            <summary>
+            J
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.K">
+            <summary>
+            K
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.L">
+            <summary>
+            L
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.M">
+            <summary>
+            M
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.N">
+            <summary>
+            N
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.O">
+            <summary>
+            O
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.P">
+            <summary>
+            P
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Q">
+            <summary>
+            Q
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.R">
+            <summary>
+            R
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.S">
+            <summary>
+            S
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.T">
+            <summary>
+            T
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.U">
+            <summary>
+            U
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.V">
+            <summary>
+            V
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.W">
+            <summary>
+            W
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.X">
+            <summary>
+            X
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Y">
+            <summary>
+            Y
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Z">
+            <summary>
+            Z
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Alpha0">
+            <summary>
+            0
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Alpha1">
+            <summary>
+            1
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Alpha2">
+            <summary>
+            2
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Alpha3">
+            <summary>
+            3
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Alpha4">
+            <summary>
+            4
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Alpha5">
+            <summary>
+            5
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Alpha6">
+            <summary>
+            6
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Alpha7">
+            <summary>
+            7
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Alpha8">
+            <summary>
+            8
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.KeyboardKey.Alpha9">
+            <summary>
+            9
+            </summary>
+        </member>
+        <member name="T:DxLibManageWrapper.Library">
+            <summary>
+            <code>
+            読み: ライブラリ
+            DXライブラリの開始と終了を行なうためのクラス
+            </code>
+            </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.Library.Init">
+            <summary>
+            <code>
+            読み: イニット(イニシャライズ)
+            DXライブラリの使用を宣言し、初期化するためのもの
+            この関数を実行しなければDXライブラリを利用した
+            描画・入力・サウンドの再生などは一切できない
+            なので、プログラムの冒頭で必ず呼び出すこと
+            また、この関数の実行内容が失敗しても何もできないので、
+            戻り値が<see cref="F:DxLibManageWrapper.DLMWResult.Failed"/>だった場合即座にアプリケーションを終了させる
+            DXライブラリのDxLib_Init()
+            
+            // DXライブラリの初期化
+            if(Library.Init() == <see cref="F:DxLibManageWrapper.DLMWResult.Failed"/>)
+            {
+            	return;
+            }
+            </code>
+            </summary>
+            <returns><see cref="T:DxLibManageWrapper.DLMWResult"/></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Library.End">
+            <summary>
+            <code>
+            読み: エンド
+            DXライブラリの使用終了を宣言し、ライブラリの終了処理を行なうもの
+            プログラムの終わりで必ず呼び出すこと
+            DXライブラリのDxLib_End()
+            
+            // DXライブラリを終了する
+            Library.End();
+            </code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DxLibManageWrapper.Load">
+            <summary>
+            <code>
+            読み: ロード
+            各種ゲーム内素材の読込を行なうDXライブラリの関数をまとめたクラス
+            </code>
+            </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.Load.SoundFile(System.String,System.Int32@)">
+            <summary>
+            <code>
+            読み: サウンドファイル
+            サウンドファイルを読み込む
+            DXライブラリのLoadSoundMem()
+            
+            // サウンドファイルを読み込む
+            int idBgm;
+            Load.SoundFile("BGM.mp3", out idBgm);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="filePath">サウンドファイルのパス。絶対パスでも相対パスでも可。ファイル拡張子まで必ず含めること</param>
+            <param name="soundId">読み込んだサウンドファイルのIDが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Load.FontFile(System.String,DxLibManageWrapper.IDLMWFont@)">
+            <summary>
+            <code>
+            読み: フォントファイル
+            ユーザーのPCにインストールされていないフォントをファイルから読み込む
+            DXライブラリのCreateFontToHandle()
+            
+            // フォントファイルの読込
+            <see cref="T:DxLibManageWrapper.IDLMWFont"/> font = null;
+            Load.FontFile("font.ttf", out font);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="fontFilePath">フォントファイルのパス。絶対パスでも相対パスでも可。ファイル拡張子まで必ず含めること</param>
+            <param name="font">読み込んだフォントが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Load.Font(System.String,DxLibManageWrapper.IDLMWFont@)">
+            <summary>
+            <code>
+            読み: フォント
+            PCにインストールされているフォントを読み込む
+            DXライブラリのCreateFontToHandle()
+            
+            // フォントを読み込む
+            <see cref="T:DxLibManageWrapper.IDLMWFont"/> font = null;
+            Load.Font("fontName", out font);
+            </code>
+            </summary>
+            <param name="fontName">フォント名</param>
+            <param name="font">読み込んだフォントが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Load.SplitImages(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32[]@)">
+            <summary>
+            <code>
+            読み: スプリットイメージズ
+            1枚の画像を分割して読み込む
+            縦横の分割数と分割後1枚当たりのサイズを指定する
+            DXライブラリのLoadDivGraph()
+            
+            // 300x300の画像を9枚に分割して読み込む
+            int[] imageIds = new int[9];
+            Load.SplitImages("picture.jpg", 3, 3, 100, 100, out imageIds);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="fileName">画像ファイルのパス。絶対パスでも相対パスでも可。ファイル拡張子まで必ず含めること</param>
+            <param name="numOfHoriDivs">横方向の分割数</param>
+            <param name="numOfVertDivs">縦方向の分割数</param>
+            <param name="widthPerDivImage">分割後1枚当たりの幅</param>
+            <param name="heightPerDivImage">分割後1枚当たりの高さ</param>
+            <param name="imageIds">分割後の画像全てのIDが格納されるint型の配列</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Load.Image(System.String,System.Int32@)">
+            <summary>
+            <code>
+            読み: イメージ
+            画像を読み込む
+            
+            // 画像を読み込む
+            int imageId;
+            Load.Image("picture.png", out imageId);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="fileName">画像ファイルのパス。絶対パスでも相対パスでも可。ファイル拡張子まで必ず含めること</param>
+            <param name="imageId">読み込んだ画像のIDが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="T:DxLibManageWrapper.Measure">
+            <summary>
+            <code>
+            読み: メジャー
+            各種計測を行なうDXライブラリの関数をまとめたクラス
+            </code>
+            </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.Measure.SoundDuration(System.Int32,System.Int64@)">
+            <summary>
+            <code>
+            読み: サウンドデュレーション
+            指定したIDのサウンドの再生時間を取得する
+            再生時間はミリ秒で返される
+            DXライブラリのGetSoundTotalTime()
+            
+            // サウンドの再生時間を取得する
+            long duration;
+            Measure.SoundDuration(soundId, out duration);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="soundId">再生時間を取得したいサウンドのID</param>
+            <param name="duration">再生時間(単位: ミリ秒)が格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Measure.SoundPitch(System.Int32,System.Int32@)">
+            <summary>
+            <code>
+            読み: サウンドピッチ
+            指定したサウンドの現在のピッチを取得する
+            サウンドのピッチは<see cref="M:DxLibManageWrapper.Sound.SetPitch(System.Int32,System.Int32)"/>で変更でき、
+            この関数で取得されるピッチは同じサウンドに対して最後に<see cref="M:DxLibManageWrapper.Sound.SetPitch(System.Int32,System.Int32)"/>で設定した値
+            DXライブラリのGetFrequnencySoundMem()
+            
+            // サウンドのピッチを取得する
+            int pitch;
+            Measure.SoundPitch(soundId, out pitch);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="soundId">ピッチを計測したいサウンドのID</param>
+            <param name="pitch">ピッチが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Measure.DrawTextSize(System.Object,System.Int32,System.Int32@,System.Int32@)">
+            <summary>
+            <code>
+            読み: ドローテキストサイズ
+            指定したフォントデータで描画した時の文字列が収まる矩形のサイズを計測する
+            この関数ではサイズが得られるだけで描画はされないことに注意
+            DXライブラリのGetDrawStringSizeToHandle()
+            
+            // フォントデータを使って描画する文字列のサイズを計測する
+            int width;
+            int height;
+            Measure.DrawTextSize("TEST", fontId, out width, out height);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="value">描画する内容(string型の値でも、それ以外の型の値でもOK)</param>
+            <param name="fontId">フォントデータのID</param>
+            <param name="width">描画時の幅が格納される</param>
+            <param name="height">描画時の高さが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Measure.DrawTextSize(System.Object,System.Int32@,System.Int32@)">
+            <summary>
+            <code>
+            読み: ドローテキストサイズ
+            デフォルトフォントで描画した時の文字列が収まる矩形のサイズを計測する
+            この関数ではサイズが得られるだけで描画はされないことに注意
+            DXライブラリのGetDrawStringSize()
+            
+            // 描画する文字列のサイズを計測する
+            int width;
+            int height;
+            Measure.DrawTextSize("TEST", out width, out height);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="value">描画する内容(string型の値でも、それ以外の型の値でもOK)</param>
+            <param name="width">描画時の幅が格納される</param>
+            <param name="height">描画時の高さが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Measure.ImageSize(System.Int32,System.Int32@,System.Int32@)">
+            <summary>
+            <code>
+            読み: イメージサイズ
+            指定したIDの画像のサイズを取得する
+            DXライブラリのGetGraphSize()
+            
+            // 画像のサイズを取得する
+            int width;
+            int height;
+            Measure.ImageSize(imageId, out width, out height);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="imageId">サイズを計測する画像のID</param>
+            <param name="width">画像の幅が格納される</param>
+            <param name="height">画像の高さが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="T:DxLibManageWrapper.MouseButtons">
+            <summary>
+            <code>
+            マウスのボタン種別
+            <see cref="M:DxLibManageWrapper.Input.GetMouseButtons(DxLibManageWrapper.MouseButtons@)"/>の戻り値
+            ビットフラグとして利用可能
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.MouseButtons.None">
+            <summary>
+            どのボタンも押されていない
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.MouseButtons.Left">
+            <summary>
+            左ボタン
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.MouseButtons.Right">
+            <summary>
+            右ボタン
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.MouseButtons.Middle">
+            <summary>
+            中央ボタン(マウスホイール)
+            </summary>
+        </member>
+        <member name="T:DxLibManageWrapper.Screen">
+            <summary>
+            <code>
+            読み: スクリーン
+            DXライブラリの描画領域(スクリーン)の設定に関する関数をまとめたクラス
+            </code>
+            </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.Screen.SetSize(System.Int32,System.Int32)">
+            <summary>
+            <code>
+            読み: セットサイズ
+            スクリーンサイズをセットする
+            ウィンドウのサイズとは違うことに注意(ウィンドウのサイズを変える場合は<see cref="M:DxLibManageWrapper.Window.SetSize(System.Int32,System.Int32)"/>を使用する)
+            DXライブラリのSetGraphMode()
+            
+            // スクリーンサイズを(1280, 960)にする
+            Screen.SetSize(1280, 960);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="width">スクリーンの幅</param>
+            <param name="height">スクリーンの高さ</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Screen.Clear">
+            <summary>
+            <code>
+            読み: クリア
+            現在のスクリーンの内容をクリアする
+            クリア後のスクリーンは、現在の背景色で塗りつぶされた状態になる
+            DXライブラリのClearDrawScreen()
+            
+            // 現在のスクリーンをクリアする
+            Screen.Clear();
+            </code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Screen.SetBackgroundColor(DxLibManageWrapper.DLMWColor)">
+            <summary>
+            <code>
+            読み: セットバックグラウンドカラー
+            <see cref="T:DxLibManageWrapper.DLMWColor"/>で背景色を設定する
+            DXライブラリのSetBackgroundColor()
+            
+            // 背景色を赤にする
+            Screen.SetBackgroundColor(<see cref="P:DxLibManageWrapper.DLMWColor.Red"/>);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="color">背景色</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Screen.Flip">
+            <summary>
+            <code>
+            読み: フリップ
+            描画した内容をウィンドウに表示する
+            DXライブラリのScreenFlip()
+            
+            // 現在のスクリーンの内容をウィンドウに表示する
+            Screen.Flip();
+            </code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Screen.SaveToJPEG(System.String,System.Int32)">
+            <summary>
+            <code>
+            読み: セーブトゥジェイペグ
+            現在のスクリーンをJPEG形式で保存する
+            いわゆるスクリーンショット
+            DXライブラリのSaveDrawScreenToJEPG()
+            
+            // DrawResult.jpgという名前で実行可能ファイル(.exe)があるフォルダに保存する
+            Screen.SaveToJPEG("DrawResult.jpg");
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="filePath">保存先ファイルパス</param>
+            <param name="quality0_100">(省略可能。省略した場合、最高品質の100が指定される)JPEGの品質</param>
+            <returns></returns>
+        </member>
+        <member name="T:DxLibManageWrapper.Sound">
+            <summary>
+            <code>
+            読み: サウンド
+            DXライブラリのサウンド関係の関数をまとめたクラス
+            </code>
+            </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.DuplicateSoundId(System.Int32,System.Int32@)">
+            <summary>
+            <code>
+            読み: デュプリケートサウンドアイディー
+            サウンドファイルは素材の中でもサイズが大きく、読込も重い処理になる
+            なので、1度メモリに読み込んだサウンドを使いまわせると効率が良い
+            効果音のように大量に異なるタイミングや音量、ピッチで再生されるサウンドのために利用する
+            この関数で生成したサウンドのIDは、複製元のサウンドのIDで再生されるサウンドと同じ音で、
+            個別に再生管理などができるサウンドIDとなる
+            DXライブラリのDuplicateSoundMem()
+            
+            // 複製元のサウンドから100個の個別に再生管理ができるサウンドのIDを作成する
+            int[] duplicatedSoundIds = new int[100];
+            for(int i = 0; i &lt; 100; i++)
+            {
+            	Sound.DuplicateSoundIds(soundId, out duplicatedSoundIds[i]);
+            }
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="srcSoundId">複製元のサウンドID</param>
+            <param name="soundId">複製されたサウンドIDが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.GetNowTime(System.Int32)">
+            <summary>
+            <code>
+            読み: ゲットナウタイム
+            指定したサウンドの現在の再生位置をミリ秒で取得する
+            DXライブラリのGetSoundCurrentTime()
+            
+            // 現在の再生位置を取得する
+            long time = Sound.GetNowTime(soundId);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="soundId">再生位置を取得したいサウンドのID</param>
+            <returns>現在の再生位置(単位: ミリ秒)</returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.SetDefaultPitch(System.Int32)">
+            <summary>
+            <code>
+            読み: セットデフォルトピッチ
+            指定したサウンドのピッチをデフォルトに戻す
+            ピッチについては<see cref="M:DxLibManageWrapper.Sound.SetPitch(System.Int32,System.Int32)"/>を参照
+            DXライブラリのSetFrequencySoundMem()
+            
+            // ピッチをデフォルトに戻す
+            Sound.SetDefaultPitch(soundId);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="soundId">ピッチをデフォルトに戻したいサウンドのID</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.SetDefaultPan(System.Int32)">
+            <summary>
+            <code>
+            読み: セットデフォルトパン
+            指定したサウンドのパンをデフォルトに戻す
+            パンについては<see cref="M:DxLibManageWrapper.Sound.SetPan(System.Int32,System.Int32)"/>を参照
+            DXライブラリのChangePanSoundMem()
+            
+            // パンをデフォルトに戻す
+            Sound.SetDefaultPan(soundId);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="soundId">パンをデフォルトに戻したいサウンドのID</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.SetDefaultVolue(System.Int32)">
+            <summary>
+            <code>
+            読み: セットデフォルトヴォリューム
+            指定したサウンドの音量をデフォルトに戻す
+            DXライブラリのChangeVolumeSoundMem()
+            
+            // 音量をデフォルトに戻す
+            Sound.SetDefaultVolume(soundId);
+            </code>
+            </summary>
+            <param name="soundId">音量をデフォルトに戻したいサウンドのID</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.SetPitch(System.Int32,System.Int32)">
+            <summary>
+            <code>
+            読み: セットピッチ
+            指定したサウンドのピッチを設定する
+            ピッチは周波数のことであり、
+            低いピッチにしたときはスロー再生したときのような間延びしたサウンドに
+            高いピッチにしたときは高速再生したときのキュルキュルサウンドになる
+            デフォルトのピッチに戻したいときはこの関数に-1を渡すか、<see cref="M:DxLibManageWrapper.Sound.SetDefaultPitch(System.Int32)"/>を使用する
+            DXライブラリのSetFrequencySoundMem()
+            
+            // 高いピッチを指定してキュルキュルサウンドにする
+            Sound.SetPitch(soundId, 50000);
+            </code>
+            </summary>
+            <param name="soundId">ピッチを変更したいサウンドのID</param>
+            <param name="pitch_100_100000">ピッチ(100から10万のいずれかで、単位はHz(ヘルツ))</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.SetPan(System.Int32,System.Int32)">
+            <summary>
+            <code>
+            読み: セットパン
+            指定したサウンドのパンを設定する
+            パンはどの位置のスピーカーからより大きく発音するのかを指定する値
+            ヘッドフォンなどの左右にスピーカーがある環境でのみ有効
+            パンの値として-255から255を渡し、-255は左のスピーカーのみ、255は右のスピーカーのみ、0で左右のスピーカーから均等に発音される
+            デフォルトに戻したい場合はこの関数をサウンドIDだけ渡すか<see cref="M:DxLibManageWrapper.Sound.SetDefaultPan(System.Int32)"/>を実行する
+            DXライブラリのChangePanSoundMem()
+            
+            // 左のスピーカーからのみ発音させる
+            Sound.SetPan(soundId, -255);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="soundId">パンを変更したいサウンドのID</param>
+            <param name="pan_minus255_255">(省略可能。省略した場合、デフォルトの0)-255から255のいずれかの値</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.SetVolume(System.Int32,System.Int32)">
+            <summary>
+            <code>
+            読み: セットヴォリューム
+            指定したサウンドの音量を設定する
+            デフォルトの音量に戻したい場合は、この関数を音量を渡さずに呼ぶか<see cref="M:DxLibManageWrapper.Sound.SetDefaultVolue(System.Int32)"/>を実行する
+            DXライブラリのChangeVolumeSoundMem()
+            
+            // サウンドの音量を50%に変更する
+            Sound.SetVolume(soundId, 127);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="soundId">音量を設定したいサウンドのID</param>
+            <param name="volume_0_255">(省略可能。省略した場合、デフォルトの255)0(無音)から255(最大音量)</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.Stop(System.Int32)">
+            <summary>
+            <code>
+            読み: ストップ
+            再生しているサウンドを停止する
+            停止したサウンドを先頭から再生再開する場合は<see cref="M:DxLibManageWrapper.Sound.Play(System.Int32,DxLibManageWrapper.SoundPlayType)"/>
+            停止した位置から再開する場合は<see cref="M:DxLibManageWrapper.Sound.Resume(System.Int32,DxLibManageWrapper.SoundPlayType)"/>をそれぞれ使用する
+            DXライブラリのStopSoundMem()
+            
+            // サウンドを停止する
+            Sound.Stop(soundId);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="soundId">再生を停止するサウンドのID</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.CheckStopped(System.Int32,System.Boolean@)">
+            <summary>
+            <code>
+            読み: チェックストップド
+            指定したサウンドの再生が停止しているかどうかを判断できる
+            DXライブラリのCheckSoundMem()
+            
+            // サウンドが停止しているかどうかを取得する
+            bool isStopped;
+            Sound.CheckStopped(soundId, out isStopped);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="soundId">停止中であるかどうかを確認したいサウンドのID</param>
+            <param name="isStopped">停止中であればtrue、そうでなければfalseが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.CheckPlaying(System.Int32,System.Boolean@)">
+            <summary>
+            <code>
+            読み: チェックプレイイング
+            指定したサウンドが現在再生中かどうかを判断できる
+            DXライブラリのCheckSoundMem()
+            
+            // 再生中かどうかを取得する
+            bool isPlaying;
+            Sound.CheckPlaying(soundId, out isPlaying);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="soundId">再生中であるかどうかを確認したいサウンドのID</param>
+            <param name="isPlaying">再生中であればtrue、そうでなければfalseが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.Play(System.Int32,DxLibManageWrapper.SoundPlayType)">
+            <summary>
+            <code>
+            読み: プレイ
+            指定したサウンドの再生を開始する
+            <see cref="M:DxLibManageWrapper.Sound.Stop(System.Int32)"/>で停止したサウンドをこの関数を使って再生再開すると先頭から再開される
+            DXライブラリのPlaySoundMem()
+            
+            // サウンドを再生する
+            Sound.Play(soundId);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="soundId">再生を始めたいサウンドのID</param>
+            <param name="type">(省略可能。省略した場合、デフォルトの<see cref="F:DxLibManageWrapper.SoundPlayType.Background"/>)再生タイプ</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.Resume(System.Int32,DxLibManageWrapper.SoundPlayType)">
+            <summary>
+            <code>
+            読み: リジューム
+            <see cref="M:DxLibManageWrapper.Sound.Stop(System.Int32)"/>で停止したサウンドを停止位置から再生を再開するためのもの
+            未再生のサウンドをこの関数で再生した場合は<see cref="M:DxLibManageWrapper.Sound.Play(System.Int32,DxLibManageWrapper.SoundPlayType)"/>と同じ動作
+            DXライブラリのPlaySoundMem()
+            
+            // サウンドの再生を再開する
+            Sound.Resume(soundId);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="soundId">再生を再開したいサウンドのID</param>
+            <param name="type">(省略可能。省略した場合、デフォルトの<see cref="F:DxLibManageWrapper.SoundPlayType.Background"/>)再生再開時の再生タイプ</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Sound.LoadFile(System.String,System.Int32@)">
+            <summary>
+            <code>
+            読み: ロードファイル
+            サウンドファイルをロードする
+            <see cref="M:DxLibManageWrapper.Load.SoundFile(System.String,System.Int32@)"/>と同じ動作
+            
+            // サウンドファイルを読み込む
+            int soundId;
+            Sound.LoadFile("sound.wav", out soundId);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="filePath">サウンドファイルのパス。絶対パスでも相対パスでも可。ファイル拡張子まで必ず含めること</param>
+            <param name="soundId">読み込んだサウンドファイルのIDが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="T:DxLibManageWrapper.SoundPlayType">
+            <summary>
+            <code>
+            読み: サウンドプレイタイプ
+            サウンドの再生方法
+            <see cref="M:DxLibManageWrapper.Sound.Play(System.Int32,DxLibManageWrapper.SoundPlayType)"/>及び<see cref="M:DxLibManageWrapper.Sound.Resume(System.Int32,DxLibManageWrapper.SoundPlayType)"/>に渡す値
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.SoundPlayType.Normal">
+            <summary>
+            <code>
+            通常再生
+            再生が終わるまで他の処理が止まるので、使用には要注意
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.SoundPlayType.Background">
+            <summary>
+            <code>
+            バックグラウンド再生
+            再生しても他の処理を止めないので、再生にはこの値を使うこと
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.SoundPlayType.Loop">
+            <summary>
+            <code>
+            ループ再生用
+            バックグランドかつループ再生を指定するので、BGMなどに利用する
+            </code>
+            </summary>
+        </member>
+        <member name="T:DxLibManageWrapper.DLMWColor">
+            <summary>
+            <code>
+            読み: カラー
+            色情報を保持する構造体
+            RGB各成分を0から255の値で保持して特定の色を示す
+            </code>
+            </summary>
+        </member>
+        <member name="P:DxLibManageWrapper.DLMWColor.Black">
+            <summary>
+            黒
+            </summary>
+        </member>
+        <member name="P:DxLibManageWrapper.DLMWColor.White">
+            <summary>
+            白
+            </summary>
+        </member>
+        <member name="P:DxLibManageWrapper.DLMWColor.Red">
+            <summary>
+            赤
+            </summary>
+        </member>
+        <member name="P:DxLibManageWrapper.DLMWColor.Green">
+            <summary>
+            緑
+            </summary>
+        </member>
+        <member name="P:DxLibManageWrapper.DLMWColor.Blue">
+            <summary>
+            青
+            </summary>
+        </member>
+        <member name="P:DxLibManageWrapper.DLMWColor.Yellow">
+            <summary>
+            黄
+            </summary>
+        </member>
+        <member name="P:DxLibManageWrapper.DLMWColor.Magenta">
+            <summary>
+            マゼンタ
+            </summary>
+        </member>
+        <member name="P:DxLibManageWrapper.DLMWColor.Cyan">
+            <summary>
+            シアン
+            </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.DLMWColor.GetRandomColor">
+            <summary>
+            <code>
+            読み: ゲットランダムカラー
+            ランダムな色を取得できる
+            
+            // ランダムな色を取得する
+            <see cref="T:DxLibManageWrapper.DLMWColor"/> color = DLMWColor.GetRandomColor();
+            </code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:DxLibManageWrapper.DLMWColor.R">
+            <summary>
+            赤成分(0から255)
+            </summary>
+        </member>
+        <member name="P:DxLibManageWrapper.DLMWColor.G">
+            <summary>
+            緑成分(0から255)
+            </summary>
+        </member>
+        <member name="P:DxLibManageWrapper.DLMWColor.B">
+            <summary>
+            青成分(0から255)
+            </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.DLMWColor.#ctor(System.UInt32,System.UInt32,System.UInt32)">
+            <summary>
+            <code>
+            DLMWColor構造体のコンストラクタ
+            RGB各成分を指定して色を作る
+            
+            // 灰色を作成
+            <see cref="T:DxLibManageWrapper.DLMWColor"/> gray = new <see cref="T:DxLibManageWrapper.DLMWColor"/>(128, 128, 128);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="red">赤成分(0から255のいずれか)</param>
+            <param name="green">緑成分(0から255のいずれか)</param>
+            <param name="blue">青成分(0から255のいずれか)</param>
+        </member>
+        <member name="T:DxLibManageWrapper.Wait">
+            <summary>
+            <code>
+            読み: ウェイト
+            DXライブラリの各種待機系関数をまとめたクラス
+            </code>
+            </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.Wait.KeyInput">
+            <summary>
+            <code>
+            読み: キーインプット
+            いずれかのキーが入力されるまで待機する
+            キーの入力があるまで処理が停止するので、ゲームループ内での使用は注意すること
+            DXライブラリのWaitKey()
+            
+            // キー入力があるまで待機する
+            Wait.KeyInput();
+            </code>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Wait.VSync(System.Int32)">
+            <summary>
+            <code>
+            読み: ブイシンク
+            モニターの垂直同期を指定回数に到達するまで待機する
+            指定した回数まで垂直同期されるまで処理が停止するので、ゲームループ内での使用は注意すること
+            DXライブラリのWaitVSync()
+            
+            // 垂直同期を10回待機する
+            Wait.VSync(10);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="syncCount">垂直同期の待機回数</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Wait.Timer(System.Int32)">
+            <summary>
+            <code>
+            読み: タイマー
+            指定した時間(単位: ミリ秒)が経過するまで待機する
+            指定した時間が経過するまで処理が停止するので、ゲームループ内での使用は注意すること
+            DXライブラリのWaitTimer()
+            
+            // 100ミリ秒待機する
+            Wait.Timer(100);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="milliSeconds">待機する時間(単位: ミリ秒)</param>
+            <returns></returns>
+        </member>
+        <member name="T:DxLibManageWrapper.Window">
+            <summary>
+            <code>
+            読み: ウィンドウ
+            DXライブラリのウィンドウを制御するための関数をまとめたクラス
+            </code>
+            </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.Window.SetSize(System.Int32,System.Int32)">
+            <summary>
+            <code>
+            読み: セットサイズ
+            ウィンドウのサイズを設定する
+            スクリーンサイズとは違うことに注意!(スクリーンサイズを変更したい場合は<see cref="M:DxLibManageWrapper.Screen.SetSize(System.Int32,System.Int32)"/>を使用する)
+            ウィンドウとスクリーンのサイズが異なるときは、スクリーンがウィンドウのサイズに合わせてスケールされて表示される
+            DXライブラリのSetWindowSize()
+            
+            // ウィンドウのサイズを(1280, 960)にする
+            Window.SetSize(1280, 960);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="width">(省略可能。省略した場合、デフォルトの640)ウィンドウの幅</param>
+            <param name="height">(省略可能。省略した場合、デフォルトの480)ウィンドウの高さ</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Window.ChangeMode(DxLibManageWrapper.WindowMode)">
+            <summary>
+            <code>
+            読み: チェンジモード
+            ウィンドウモードを変更する
+            
+            // ウィンドウモードに変更する
+            Window.ChangeMode(<see cref="F:DxLibManageWrapper.WindowMode.Windowed"/>);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="mode"><see cref="T:DxLibManageWrapper.WindowMode"/>のどちらかの値</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Window.EnableSizeChange(System.Boolean)">
+            <summary>
+            <code>
+            読み: イナブルサイズチェンジ
+            ウィンドウモード時のユーザーによりウィンドウサイズの変更の可否設定
+            DXライブラリのSetWindowSizeChangeEnableFlag()
+            
+            // ユーザーによるウィンドウサイズの変更を不可にする
+            Window.EnableSizeChange(false);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="enable">trueで許可、falseで不許可</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Window.EnableRunInBackground(System.Boolean)">
+            <summary>
+            <code>
+            読み: イナブルランインバックグラウンド
+            アプリがバックグランドに行ったとき(他のアプリを操作している状態)でも、アプリの更新処理を続けるかどうかを設定する
+            falseを渡した場合、アプリがフォアグラウンドに復帰したら、バックグランドになった状態から更新が再開する
+            DXライブラリのSetAlwaysRunFlag()
+            
+            // バックグランド時でも更新を続ける
+            Window.EnableRunInBackground(true);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="enable">trueで続ける、falseで続けない</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Window.SetTitle(System.String)">
+            <summary>
+            <code>
+            読み: セットタイトル
+            ウィンドウの左上に表示されるタイトルを設定する
+            DXライブラリのSetMainWindowText()
+            
+            // ウィンドウタイトルを設定する
+            Window.SetTitle("GameTitle");
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="title">タイトルを表す文字列</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Window.SetFullScreenResolutionMode(DxLibManageWrapper.FullScreenResolutionMode)">
+            <summary>
+            <code>
+            読み: セットフルスクリーンレゾリューションモード
+            フルスクリーン時の解像度モードを設定する
+            DXライブラリのSetFullScreenResolutionMode()
+            
+            // プライマリモニタの解像度に合わせる
+            Screen.SetFullScreenResolutionMode(<see cref="F:DxLibManageWrapper.FullScreenResolutionMode.Desktop"/>);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="mode"><see cref="T:DxLibManageWrapper.FullScreenResolutionMode"/>のいずれかの値</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Window.SetFullScreenScalingMode(DxLibManageWrapper.FullScreenScalingMode)">
+            <summary>
+            <code>
+            読み: セットフルスクリーンスケーリングモード
+            フルスクリーン時のスクリーンの拡大方法を設定する
+            DXライブラリのSetFullScreenScalingMode()
+            
+            // ピクセルが滲むように拡大するモードを指定する
+            Window.SetFullScreenScalingMode(<see cref="F:DxLibManageWrapper.FullScreenScalingMode.Bilinear"/>);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="mode"><see cref="T:DxLibManageWrapper.FullScreenScalingMode"/>のいずれかの値</param>
+            <returns></returns>
+        </member>
+        <member name="M:DxLibManageWrapper.Window.GetSize(System.Int32@,System.Int32@)">
+            <summary>
+            <code>
+            読み: ゲットサイズ
+            ウィンドウサイズを取得する
+            DXライブラリのGetWindowSize()
+            
+            // ウィンドウサイズを取得する
+            int width;	// 幅
+            int height;	// 高さ
+            Window.GetSize(out width, out height);
+            
+            引数の説明
+            </code>
+            </summary>
+            <param name="width">ウィンドウの幅が格納される</param>
+            <param name="height">ウィンドウの高さが格納される</param>
+            <returns></returns>
+        </member>
+        <member name="T:DxLibManageWrapper.WindowMode">
+            <summary>
+            <code>
+            読み: ウィンドウモード
+            ウィンドウモード
+            <see cref="M:DxLibManageWrapper.Window.ChangeMode(DxLibManageWrapper.WindowMode)"/>に引数として与えるもの
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.WindowMode.FullScreen">
+            <summary>
+            フルスクリーン
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.WindowMode.Windowed">
+            <summary>
+            ウィンドウモード
+            </summary>
+        </member>
+    </members>
+</doc>
