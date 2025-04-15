@@ -1777,47 +1777,28 @@
             <param name="pitch">ピッチが格納される</param>
             <returns></returns>
         </member>
-        <member name="M:DxLibManageWrapper.Measure.DrawTextSize(System.Object,System.Int32,System.Int32@,System.Int32@)">
+        <member name="M:DxLibManageWrapper.Measure.DrawTextSize(System.Object,System.Int32@,System.Int32@,System.Nullable{System.Int32})">
             <summary>
             <code>
             読み: ドローテキストサイズ
-            指定したフォントデータで描画した時の文字列が収まる矩形のサイズを計測する
+            <see cref="M:DxLibManageWrapper.Draw.Text(System.Single,System.Single,DxLibManageWrapper.DLMWColor,System.Object,System.Nullable{System.Int32},System.Nullable{DxLibManageWrapper.DLMWColor})"/>で描画した時の文字列が収まる矩形のサイズを計測する
             この関数ではサイズが得られるだけで描画はされないことに注意
-            DXライブラリのGetDrawStringSizeToHandle()
+            DXライブラリのGetDrawStringSize()およびGetDrawStringSizeToHandle()
             
-            // フォントデータを使って描画する文字列のサイズを計測する
-            int width;
-            int height;
-            Measure.DrawTextSize("TEST", fontId, out width, out height);
-            
-            引数の説明
-            </code>
-            </summary>
-            <param name="value">描画する内容(string型の値でも、それ以外の型の値でもOK)</param>
-            <param name="fontId">フォントデータのID</param>
-            <param name="width">描画時の幅が格納される</param>
-            <param name="height">描画時の高さが格納される</param>
-            <returns></returns>
-        </member>
-        <member name="M:DxLibManageWrapper.Measure.DrawTextSize(System.Object,System.Int32@,System.Int32@)">
-            <summary>
-            <code>
-            読み: ドローテキストサイズ
-            デフォルトフォントで描画した時の文字列が収まる矩形のサイズを計測する
-            この関数ではサイズが得られるだけで描画はされないことに注意
-            DXライブラリのGetDrawStringSize()
-            
-            // 描画する文字列のサイズを計測する
+            // デフォルトのフォントで描画されたときのサイズを取得する
             int width;
             int height;
             Measure.DrawTextSize("TEST", out width, out height);
+            // 指定のフォントで描画するときのサイズを取得する
+            Measure.DrawTextSize("TEST", out width, out height, fontId);
             
             引数の説明
             </code>
             </summary>
-            <param name="value">描画する内容(string型の値でも、それ以外の型の値でもOK)</param>
+            <param name="value">計測する内容(string型の値でも、それ以外の型の値でもOK)</param>
             <param name="width">描画時の幅が格納される</param>
             <param name="height">描画時の高さが格納される</param>
+            <param name="fontId">(省略可能。省略した場合、デフォルトのフォントで計測)計測に使用するフォントのID</param>
             <returns></returns>
         </member>
         <member name="M:DxLibManageWrapper.Measure.ImageSize(System.Int32,System.Int32@,System.Int32@)">
