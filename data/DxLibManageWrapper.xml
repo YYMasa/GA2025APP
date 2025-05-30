@@ -4,6 +4,61 @@
         <name>DxLibManageWrapper</name>
     </assembly>
     <members>
+        <member name="T:DxLibManageWrapper.BlendMode">
+            <summary>
+            <code>
+            読み: ブレンドモード
+            半透明で描画しようとしているときに、すでに描画されているものに対しての色の重ね方
+            <see cref="M:DxLibManageWrapper.Draw.SetBlendMode(DxLibManageWrapper.BlendMode,System.Int32)"/>に引数として与えるもの
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.BlendMode.None">
+            <summary>
+            <code>
+            ブレンド処理は行なわれない。
+            引数strength0_255は無視される。
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.BlendMode.Alpha">
+            <summary>
+            <code>
+            アルファブレンディング。
+            引数strength0_255はアルファ値として扱われ、255に近いほど不透明になる。
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.BlendMode.Add">
+            <summary>
+            <code>
+            加算合成。
+            すでに描画されている部分に対して、描画しようとしているものの明るさを加える。
+            そのため、元から明るい部分はより明るくなる。
+            引数strength0_255は、描画しようとしているものの割合。
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.BlendMode.Sub">
+            <summary>
+            <code>
+            減算合成。
+            すでに描画されている部分から、描画しようとしているものの明るさを引く。
+            元の画像が明るいほど、より暗くなる。
+            引数strength0_255は、描画しようとしているものの割合。
+            </code>
+            </summary>
+        </member>
+        <member name="F:DxLibManageWrapper.BlendMode.Mul">
+            <summary>
+            <code>
+            乗算合成。
+            すでに描画されているものと、描画しようとしているものの明るさの掛け算を行なう。
+            明るさを0から1の範囲に収めて掛け算を行なうイメージなので、元の明るさより明るくなることはない。
+            引数strength0_255は、無視される。
+            </code>
+            </summary>
+        </member>
         <member name="T:DxLibManageWrapper.DLMWResult">
             <summary>
             <code>
@@ -30,6 +85,24 @@
             DXライブラリの描画系関数をまとめたクラス
             </code>
             </summary>
+        </member>
+        <member name="M:DxLibManageWrapper.Draw.SetBlendMode(DxLibManageWrapper.BlendMode,System.Int32)">
+            <summary>
+            <code>
+            読み: セットブレンドモード
+            色の重ね方の方法を指定する
+            指定した後の全ての描画に同じ効果が現れるので、
+            別の効果が必要な場合は、その効果が必要になる描画の前で再指定すること。
+            DXライブラリのSetDrawBlendMode()
+            
+            //	透明度(アルファ)を128にして、赤い円を半透明で描画
+            Draw.SetBlendMode(<see cref="F:DxLibManageWrapper.BlendMode.Alpha"/>, 128);
+            <see cref="M:DxLibManageWrapper.Draw.Polygon(System.Single,System.Single,System.Single,System.UInt32,DxLibManageWrapper.DLMWColor)"/>(320f, 240f, 100f, 32, <see cref="P:DxLibManageWrapper.DLMWColor.Red"/>);
+            </code>
+            </summary>
+            <param name="mode"><see cref="T:DxLibManageWrapper.BlendMode"/>のいずれかの値</param>
+            <param name="strength0_255">0から255のいずれかの値。指定した方法により意味あいが違うことに注意</param>
+            <returns></returns>
         </member>
         <member name="M:DxLibManageWrapper.Draw.CircleGaugeImage(System.Single,System.Single,System.Int32,System.Single,System.Single,System.Single)">
             <summary>
